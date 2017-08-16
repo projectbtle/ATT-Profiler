@@ -1,0 +1,17 @@
+{
+    "0" : "INVALID OUTPUT"
+  , "1" : "Passkey Entry Failed"
+  , "2" : "OOB Not Available"
+  , "3" : "Authentication Requirements"
+  , "4" : "Confirm Value Failed"
+  , "5" : "Pairing Not Supported"
+  , "6" : "Encryption Key Size"
+  , "7" : "Command Not Supported"
+  , "8" : "Unspecified Reason"
+  , "9" : "Repeated Attempts"
+  , "a" : "Invalid Parameters"
+  , "b" : "DHKey Check Failed"
+  , "c" : "Numeric Comparison Failed"
+  , "d" : "BR/EDR pairing in progress"
+  , "e" : "Cross-transport Key Derivation/Generation not allowed"
+}
