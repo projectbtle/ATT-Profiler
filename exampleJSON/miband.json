@@ -1,0 +1,1142 @@
+{
+    "deviceDetails": {
+        "name": "MI Band 2",
+        "id": "c32c8acc63c9",
+        "address": "c3:2c:8a:cc:63:c9",
+        "connectable": true
+    },
+    "Services": {
+        "1800": {
+            "name": "Generic Access",
+            "type": "org.bluetooth.service.generic_access",
+            "Characteristics": {
+                "2a00": {
+                    "name": "Device Name",
+                    "type": "org.bluetooth.characteristic.gap.device_name",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "4d492042616e642032",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a01": {
+                    "name": "Appearance",
+                    "type": "org.bluetooth.characteristic.gap.appearance",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "0000",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a04": {
+                    "name": "Peripheral Preferred Connection Parameters",
+                    "type": "org.bluetooth.characteristic.gap.peripheral_preferred_connection_parameters",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "060050000000f401",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        },
+        "1801": {
+            "name": "Generic Attribute",
+            "type": "org.bluetooth.service.generic_attribute",
+            "Characteristics": {
+                "2a05": {
+                    "name": "Service Changed",
+                    "type": "org.bluetooth.characteristic.gatt.service_changed",
+                    "properties": [
+                        "read",
+                        "indicate"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "1118ffff",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                }
+            }
+        },
+        "1802": {
+            "name": "Immediate Alert",
+            "type": "org.bluetooth.service.immediate_alert",
+            "Characteristics": {
+                "2a06": {
+                    "name": "Alert Level",
+                    "type": "org.bluetooth.characteristic.alert_level",
+                    "properties": [
+                        "writeWithoutResponse"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        },
+        "1811": {
+            "name": "Alert Notification Service",
+            "type": "org.bluetooth.service.alert_notification",
+            "Characteristics": {
+                "2a46": {
+                    "name": "New Alert",
+                    "type": "org.bluetooth.characteristic.new_alert",
+                    "properties": [
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a44": {
+                    "name": "Alert Notification Control Point",
+                    "type": "org.bluetooth.characteristic.alert_notification_control_point",
+                    "properties": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "00",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                }
+            }
+        },
+        "180a": {
+            "name": "Device Information",
+            "type": "org.bluetooth.service.device_information",
+            "Characteristics": {
+                "2a25": {
+                    "name": "Serial Number String",
+                    "type": "org.bluetooth.characteristic.serial_number_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "323135653361363037633739",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a27": {
+                    "name": "Hardware Revision String",
+                    "type": "org.bluetooth.characteristic.hardware_revision_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "56302e312e332e32",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a28": {
+                    "name": "Software Revision String",
+                    "type": "org.bluetooth.characteristic.software_revision_string",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "56312e302e312e3530",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a23": {
+                    "name": "System ID",
+                    "type": "org.bluetooth.characteristic.system_id",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "c32c8afffecc63c9",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a50": {
+                    "name": "PnP ID",
+                    "type": "org.bluetooth.characteristic.pnp_id",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "01570104000001",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        },
+        "000015300000351221180009af100700": {
+            "name": null,
+            "type": null,
+            "Characteristics": {
+                "000015310000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "write",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000015320000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "writeWithoutResponse"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        },
+        "180d": {
+            "name": "Heart Rate",
+            "type": "org.bluetooth.service.heart_rate",
+            "Characteristics": {
+                "2a37": {
+                    "name": "Heart Rate Measurement",
+                    "type": "org.bluetooth.characteristic.heart_rate_measurement",
+                    "properties": [
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "Timeout",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "2a39": {
+                    "name": "Heart Rate Control Point",
+                    "type": "org.bluetooth.characteristic.heart_rate_control_point",
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        },
+        "fee0": {
+            "name": null,
+            "type": null,
+            "Characteristics": {
+                "2a2b": {
+                    "name": "Current Time",
+                    "type": "org.bluetooth.characteristic.current_time",
+                    "properties": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "e107080716061101000000",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000010000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "writeWithoutResponse",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000020000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000030000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "writeWithoutResponse",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "2a04": {
+                    "name": "Peripheral Preferred Connection Parameters",
+                    "type": "org.bluetooth.characteristic.gap.peripheral_preferred_connection_parameters",
+                    "properties": [
+                        "read",
+                        "writeWithoutResponse",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "280028000000f401",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000040000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "writeWithoutResponse",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000050000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000060000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "0f3500e107070a0f111b00e107071f121c270040",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000070000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000080000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "write",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "000000100000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                }
+            }
+        },
+        "fee1": {
+            "name": null,
+            "type": null,
+            "Characteristics": {
+                "000000090000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "writeWithoutResponse",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "01000000",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "fedd": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "fede": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "fedf": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "01",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "fed0": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "Application Error 0x80",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "fed1": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "Application Error 0x80",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "fed2": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Request Not Supported",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "fed3": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": "Application Error 0x80",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "0000fec10000351221180009af100700": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "4f",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
