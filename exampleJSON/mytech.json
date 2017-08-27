@@ -1,0 +1,256 @@
+{
+    "deviceDetails": {
+        "name": "ID107 HR",
+        "id": "ee9db385f6ad",
+        "address": "ee:9d:b3:85:f6:ad",
+        "connectable": true
+    },
+    "Services": {
+        "1800": {
+            "name": "Generic Access",
+            "type": "org.bluetooth.service.generic_access",
+            "Characteristics": {
+                "2a00": {
+                    "name": "Device Name",
+                    "type": "org.bluetooth.characteristic.gap.device_name",
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "01",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a01": {
+                    "name": "Appearance",
+                    "type": "org.bluetooth.characteristic.gap.appearance",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "4103",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a04": {
+                    "name": "Peripheral Preferred Connection Parameters",
+                    "type": "org.bluetooth.characteristic.gap.peripheral_preferred_connection_parameters",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "5000780004009001",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        },
+        "1801": {
+            "name": "Generic Attribute",
+            "type": "org.bluetooth.service.generic_attribute",
+            "Characteristics": {
+                "2a05": {
+                    "name": "Service Changed",
+                    "type": "org.bluetooth.characteristic.gatt.service_changed",
+                    "properties": [
+                        "indicate"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Read Not Permitted",
+                            "securityLevel": "Unknown"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "otherError": "ATT Write Not Permitted",
+                            "securityLevel": "Unknown"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                }
+            }
+        },
+        "af0": {
+            "name": null,
+            "type": null,
+            "Characteristics": {
+                "af6": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "01",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "af7": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "00",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "af2": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "notify"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "00",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": false,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                },
+                "af1": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "value": "01",
+                            "securityLevel": "None"
+                        },
+                        "notify": {
+                            "error": null,
+                            "applicable": false
+                        },
+                        "write": {
+                            "error": null,
+                            "applicable": true,
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        }
+    }
+}
