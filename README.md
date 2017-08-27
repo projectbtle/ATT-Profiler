@@ -99,3 +99,5 @@ Here YY:YY:YY:YY:YY:YY is the MAC address of the HCI interface on the test machi
 
 # Disclaimer #
 This script, especially when used with the -w switch, may brick or otherwise render unusable the test device. We accept no responsibility if this should occur. Please understand the risks before running the script.
+
+Only use the script on devices that belong to you!
