@@ -81,7 +81,7 @@ if (process.argv.indexOf('-a') != -1) {
 }
 
 // Passkey entry options.
-var passkeyEntry = null
+var passkeyEntry = 'u'
 var passkeyValue = null
 if (process.argv.indexOf('-p') != -1) {
     var indexOfP = process.argv.indexOf('-p')
