@@ -1,0 +1,8 @@
+{
+    "0" : "JustWorks"
+  , "1" : "Passkey"
+  , "2" : "Numeric"
+  , "3" : "OOB"
+  , "10": "Legacy"
+  , "11": "LESC"
+}

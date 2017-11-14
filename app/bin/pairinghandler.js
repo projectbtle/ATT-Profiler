@@ -19,25 +19,25 @@ function PairingHandler () {
 
 util.inherits(PairingHandler, events.EventEmitter)
 
-PairingHandler.prototype.pair = function (peripheral, targetLevel, callback, pairingTimeout = 8000) {
+PairingHandler.prototype.pair = function (peripheral, targetLevel, passkeyOpt, callback, pairingTimeout = 8000) {
   debug('[PAIRING HANDLER] Attempting to pair with security level ' + targetLevel)
   // this.deletePairingInfo(peripheral.address)
   var smpBuffer = this.pairingOptions(targetLevel)
 
-  var customCallback = function (error) {
+  var customCallback = function (error, authType, assocModel) {
     if (error === null) {
-      callback(null)
+      callback(null, authType, assocModel)
     } else if ((error === 'Timeout') || (error === 'Disconnected') || (error === 'Unknown')) {
-      callback(error)
+      callback(error, authType, assocModel)
     } else {
       var textError = smpfail[error]
       if (textError === null) { textError = 'Unmapped error' }
       debug('[PAIRING-HANDLER] Pairing attempt failed at Security Level ' + targetLevel + ' with reason: ' + textError)
-      callback(textError)
+      callback(textError, authType, assocModel)
     }
   }.bind(this)
 
-  peripheral.pair(smpBuffer, customCallback)
+  peripheral.pair(smpBuffer, passkeyOpt, customCallback)
 }
 
 PairingHandler.prototype.pairingOptions = function (securityLevel) {

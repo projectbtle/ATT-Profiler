@@ -58,17 +58,21 @@ Peripheral.prototype.disconnect = function (callback) {
 };
 
 /* Profiler Code BEGIN */
-Peripheral.prototype.pair = function (buffSmpReq, callbackFn) {
+Peripheral.prototype.pair = function (buffSmpReq, passkeyOpt, callbackFn) {
   var pairComplete = false
   var pairResponse = false
+  var authType = null
+  var assocModel = null
   var tempLtk = null
   if (callbackFn) {
-    this.once('pairResult', function (error) {
+    this.once('pairResult', function (error, retAuthType, retAssocModel) {
       pairResponse = true
+      authType = retAuthType
+      assocModel = retAssocModel
       if (error !== null) {
         debug('[PERIPHERAL] Pairing ' + error)
         pairComplete = true
-        callbackFn(error)
+        callbackFn(error, authType, assocModel)
         return
       }
     })
@@ -76,24 +80,28 @@ Peripheral.prototype.pair = function (buffSmpReq, callbackFn) {
     this.once('ltkEdiv', function (ediv, rand, ltk) {
       pairComplete = true
       tempLtk = ltk
-      callbackFn(null, null, ediv, rand, ltk)
+      callbackFn(null, authType, assocModel, ediv, rand, ltk)
     })
 
-    // Handle the case where peripheral doesn't respond to pairing request.
+    // Handle the case where peripheral doesn't respond to pairing request or doesn't send LTK.
     setTimeout(function () {
       this.removeAllListeners('pairResult')
       this.removeAllListeners('ltkEdiv')
       if (pairComplete === false) {
         if (pairResponse === false) {
-          callbackFn('Timeout')
+          console.log('[Peripheral] Executing callback with timeout.')
+          callbackFn('Timeout', authType, assocModel)
         } else if (tempLtk === null) {
           if (this.state === 'disconnected') {
-            callbackFn('Disconnected')
+            console.log('[Peripheral] Executing callback with disconnect.')
+            callbackFn('Disconnected', authType, assocModel)
           } else {
-            callbackFn(null, 'NoLtk')
+            console.log('[Peripheral] Executing callback with NoLtk. ' + authType + ' ' + assocModel)
+            callbackFn(null, authType, assocModel, 'NoLtk')
           }          
         } else {
-          callbackFn('Unknown')
+          console.log('[Peripheral] Executing callback with Unknown.')
+          callbackFn('Unknown',authType, assocModel)
         }
       }
     }.bind(this), 5000)
@@ -104,7 +112,7 @@ Peripheral.prototype.pair = function (buffSmpReq, callbackFn) {
     this.emit('pairResult', new Error('Peripheral already paired'))
   } else {
     this.state = 'pairing'
-    this._noble.pair(this.id, buffSmpReq)
+    this._noble.pair(this.id, buffSmpReq, passkeyOpt)
   }
 }
 

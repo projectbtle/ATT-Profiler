@@ -1,0 +1,5 @@
+{
+    "SMP_PASSKEY_ZERO" : ["Only try all-zero PIN", "z"]
+  , "SMP_PASSKEY_DICTIONARY" : ["Try common values from a dictionary", "d"]
+  , "SMP_PASSKEY_MANUAL" : ["User-provided PIN (input during code run)", "m"]
+}

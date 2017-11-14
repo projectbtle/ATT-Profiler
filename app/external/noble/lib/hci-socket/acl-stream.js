@@ -28,8 +28,8 @@ AclStream.prototype.encrypt = function() {
   this._smp.sendPairingRequest();
 };
 
-AclStream.prototype.pair = function(smpRequestBuffer) {
-  this._smp.sendCustomPairingRequest(smpRequestBuffer);
+AclStream.prototype.pair = function(smpRequestBuffer, passkeyOpt) {
+  this._smp.sendCustomPairingRequest(smpRequestBuffer, passkeyOpt);
 };
 
 AclStream.prototype.write = function(cid, data) {
@@ -55,9 +55,9 @@ AclStream.prototype.onSmpStk = function(stk) {
   this._hci.startLeEncryption(this._handle, random, diversifier, stk);
 };
 
-AclStream.prototype.onSmpPairing = function(error) {
+AclStream.prototype.onSmpPairing = function(error, authType, assocModel) {
   debug('[ACL-STREAM] Pairing ' + error)
-  this.emit('smpPairing', error, this._handle);
+  this.emit('smpPairing', error, authType, assocModel, this._handle);
 };
 
 AclStream.prototype.onSmpEdiv = function(ediv, rand, ltk) {

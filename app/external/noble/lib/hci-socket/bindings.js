@@ -59,10 +59,10 @@ NobleBindings.prototype.disconnect = function(peripheralUuid) {
   this._hci.disconnect(this._handles[peripheralUuid]);
 };
 
-NobleBindings.prototype.pair = function(peripheralUuid, smpRequestBuffer) {
+NobleBindings.prototype.pair = function(peripheralUuid, smpRequestBuffer, passkeyOpt) {
   var handle = this._handles[peripheralUuid]
   var aclStream = this._aclStreams[handle]
-  aclStream.pair(smpRequestBuffer)
+  aclStream.pair(smpRequestBuffer, passkeyOpt)
 
   aclStream.once('smpPairing', this.onPair.bind(this))
   aclStream.once('ediv', this.onEdiv.bind(this))
@@ -74,7 +74,7 @@ NobleBindings.prototype.pair = function(peripheralUuid, smpRequestBuffer) {
   })
 };
 
-NobleBindings.prototype.onPair = function(smpFailReason, handle) {
+NobleBindings.prototype.onPair = function(smpFailReason, authType, assocModel, handle) {
   var uuid = this._handles[handle]
   if (smpFailReason === null) {
     debug('[BINDINGS] Successfully paired')
@@ -82,7 +82,7 @@ NobleBindings.prototype.onPair = function(smpFailReason, handle) {
     debug('[BINDINGS] Pairing failed with error: ' + smpFailReason)
   }
   
-  this.emit('pair', uuid, smpFailReason)
+  this.emit('pair', uuid, smpFailReason, authType, assocModel)
 };
 
 NobleBindings.prototype.onEdiv = function(ediv, rand, ltk, handle) {

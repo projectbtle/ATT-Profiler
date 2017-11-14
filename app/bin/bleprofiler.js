@@ -16,10 +16,19 @@ const SECURITY_LEVEL_LOW = 1
 const SECURITY_LEVEL_MED = 2
 const SECURITY_LEVEL_HIGH = 3
 
-// Startup.
-console.log('BLE Security Profiler\n')
+// Authentication types.
+var SMP_AUTH_LEGACY = 0
+var SMP_AUTH_LESC = 1
 
-var BleProfiler = function (limitToProperty, includeRead, includeWrite, includeNotify) {
+// Association Models.
+var SMP_MODEL_JUSTWORKS = 0
+var SMP_MODEL_PASSKEY = 1
+var SMP_MODEL_NUMERIC = 2
+var SMP_MODEL_OOB = 3
+
+var test  = require('./assoc-model.json')
+// Startup.
+var BleProfiler = function (limitToProperty, includeRead, includeWrite, includeNotify, passkeyOpt) {
   this._bleScanner = new BleScanner()
   this._securityProfiler = new SecurityProfiler()
   this._pairingHandler = new PairingHandler()
@@ -29,6 +38,7 @@ var BleProfiler = function (limitToProperty, includeRead, includeWrite, includeN
   this._hciInterfaceUp = false
   this._checksComplete = false
   this._limitToProperty = true
+  this._passkeyOpt = passkeyOpt
   this._targetDevice = null
   this._state = 'disconnected'
   this._services = null
@@ -421,7 +431,8 @@ BleProfiler.prototype.scanForDevices = function (scanTime) {
   var increaseSecurity = function () {
     this._currentSecLevel++
 
-    var callback = function (error) {
+    var callback = function (error, authType) {
+      console.log('error ' + error + 'auth '+ authType + ' asso ' )
       if (error) {
         console.log('Pairing attempt failed at Security Level ' + this._currentSecLevel + '. Pairing error: ' + error)
         if (this._currentSecLevel < SECURITY_LEVEL_HIGH) {
@@ -433,6 +444,9 @@ BleProfiler.prototype.scanForDevices = function (scanTime) {
           finalOutput()
         }
       } else {
+        this._currAuthType = authType
+       // this._currAssocModel = assocModel
+        
         console.log('Pairing ok')
         this._state = 'paired'
         checkAllCharacteristics(true)
@@ -450,7 +464,7 @@ BleProfiler.prototype.scanForDevices = function (scanTime) {
 
       this.once('reconnected', function () {
         console.log('Now attempting to pair at Security Level ' + this._currentSecLevel)
-        this._pairingHandler.pair(this._targetDevice, this._currentSecLevel, callback)
+        this._pairingHandler.pair(this._targetDevice, this._currentSecLevel, this._passkeyOpt, callback)
       })
     }.bind(this), 3000)
   }.bind(this)

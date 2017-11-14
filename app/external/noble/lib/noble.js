@@ -155,16 +155,15 @@ Noble.prototype.onConnect = function (peripheralUuid, error) {
   }
 }
 
-Noble.prototype.pair = function (peripheralUuid, smpRequestBuffer) {
-  this._bindings.pair(peripheralUuid, smpRequestBuffer)
+Noble.prototype.pair = function (peripheralUuid, smpRequestBuffer, passkeyOpt) {
+  this._bindings.pair(peripheralUuid, smpRequestBuffer, passkeyOpt)
 }
 
-Noble.prototype.onPair = function (peripheralUuid, failReason) {
+Noble.prototype.onPair = function (peripheralUuid, failReason, authType, assocModel) {
   var peripheral = this._peripherals[peripheralUuid]
-
   if (peripheral) {
     debug('[NOBLE] Pairing ' + failReason)
-    peripheral.emit('pairResult', failReason)
+    peripheral.emit('pairResult', failReason, authType, assocModel)
   } else {
     console.warn('unknown peripheral ' + peripheralUuid + ' paired!')
     this.emit('warning', 'unknown peripheral ' + peripheralUuid + ' paired!')
