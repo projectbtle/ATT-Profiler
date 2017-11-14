@@ -40,8 +40,8 @@ var SMP_MODEL_OOB = 0x03
 // Passkey pairing - options for PIN.
 var passkeyOptions = require('../../../../bin/passkey-options.json')
 
-var SMP_PASSKEY_ZERO = passkeyOptions["SMP_PASSKEY_ZERO"][1]     // All-zero passkey.
-var SMP_PASSKEY_MANUAL = passkeyOptions["SMP_PASSKEY_MANUAL"][1]        // User-provided passkey.
+var SMP_PASSKEY_MANUAL = passkeyOptions["SMP_PASSKEY_MANUAL"][1]     // Fixed passkey.
+var SMP_PASSKEY_DYNAMIC= passkeyOptions["SMP_PASSKEY_DYNAMIC"][1]        // Dynamic passkey.
 var SMP_PASSKEY_DICTIONARY = passkeyOptions["SMP_PASSKEY_DICTIONARY"][1]  // Try passkey values from dictionary.
 
 var Smp = function (aclStream, localAddressType, localAddress, remoteAddressType, remoteAddress) {
@@ -77,8 +77,9 @@ Smp.prototype.sendPairingRequest = function () {
   this.write(this._preq);
 };
 
-Smp.prototype.sendCustomPairingRequest = function (customPairingRequest, passkeyOpt) {
+Smp.prototype.sendCustomPairingRequest = function (customPairingRequest, passkeyOpt, passkeyVal) {
   this._passkeyOpt = passkeyOpt
+  this._inputPasskey = passkeyVal
   // Intialise all values for each new pairing request.
   // Pairing request params
   this._preqIo= null      // IO capabilities
@@ -245,12 +246,12 @@ Smp.prototype.handleLegacyJustWorksPairing = function (data) {
 
 Smp.prototype.handleLegacyPasskeyPairing = function (data) {
   debug('[SMP] LE Legacy - Passkey Entry pairing.')
-  if (this._passkeyOpt === SMP_PASSKEY_ZERO) {
+  if (this._inputPasskey === '000000') {
     // Passkey with all-zero PIN is no different to Just Works for LE Legacy.
     this.handleLegacyJustWorksPairing(data)
   } else if (this._passkeyOpt === SMP_PASSKEY_DICTIONARY) {
     // Check passkey from dictionary.
-  } else if (this._passkeyOpt === SMP_PASSKEY_MANUAL) {
+  } else {
     // Get user to input passkey.
     this.handleLegacyPasskeyPairingManual(data)
   }
@@ -263,22 +264,20 @@ Smp.prototype.handleLegacyPasskeyPairingDict = function () {
 
 Smp.prototype.handleLegacyPasskeyPairingManual = function (data) {
   // Get passkey from user
-  this._inputPasskey = null
-  const inputPasskeyTerminal = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout,
-    terminal: false
-  })
-
-  /*var storePasskey = function (key) {
-    console.log('hello')
-    this._inputPasskey = key
-  }.bind(this)*/
-  
-  inputPasskeyTerminal.question('\nType in the PIN for the BLE device (this will either be a PIN displayed on screen or a fixed value provided with the device\'s documentation): ', (answer) => {
-    this._inputPasskey = answer
+  if (this._inputPasskey === null) {
+    const inputPasskeyTerminal = readline.createInterface({
+      input: process.stdin,
+      output: process.stdout,
+      terminal: false
+    })
+    
+    inputPasskeyTerminal.question('\nType in the PIN displayed on the BLE device : ', (answer) => {
+      this._inputPasskey = answer
+      this.handleLegacyPasskeyReceived(data)
+    })
+  } else {
     this.handleLegacyPasskeyReceived(data)
-  })
+  }  
 }
 
 Smp.prototype.handleLegacyPasskeyReceived = function (data) {

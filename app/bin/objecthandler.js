@@ -30,7 +30,7 @@ var ATT_ECODE_UNSUPP_GRP_TYPE = 0x10
 var ATT_ECODE_INSUFF_RESOURCES = 0x11
 
 var attErrors = require('./att-errors.json')
-
+var authModels = require('./assoc-model.json')
 function ObjectHandler () {
   this._secLevelMapper = {
     '0': 'None',
@@ -96,7 +96,7 @@ ObjectHandler.prototype.createTargetObject = function (outputJsonObject, service
   return {json: outputJsonObject, num: numCharCheckable}
 }
 
-ObjectHandler.prototype.updateJsonObject = function (outputJsonObject, services, characteristics, actionType, currentSecurityLevel, errorObject, securityObject) {
+ObjectHandler.prototype.updateJsonObject = function (outputJsonObject, services, characteristics, actionType, currentSecurityLevel, errorObject, securityObject, currentAuthType, currentAssocModel) {
   var useObj = (errorObject === null) ? securityObject : errorObject
 
   var serviceUuid = useObj.serviceUuid
@@ -150,8 +150,12 @@ ObjectHandler.prototype.updateJsonObject = function (outputJsonObject, services,
 
   // Map the security level identifier to discrete text values.
   var securityLevel = this._secLevelMapper[securityNum]
+  // Map the authentication type and association model to text values.
+  var authType = authModels[currentAuthType]
+  var assocModel = authModels[currentAssocModel]
   outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][actionType]['securityLevel'] = securityLevel
-  // }
+  outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][actionType]['authType'] = authType
+  outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][actionType]['assocModel'] = assocModel
   return outputJsonObject
 }
 
@@ -184,7 +188,7 @@ ObjectHandler.prototype.checkSecurityRequired = function (jsonObject, services, 
   return {security: securityIncreaseReqd, checks: numCharCheckable}
 }
 
-ObjectHandler.prototype.updateFinalSecurity = function (outputJsonObject, currentSecurityLevel, services, characteristics, accessTypes) {
+ObjectHandler.prototype.updateFinalSecurity = function (outputJsonObject, services, characteristics, accessTypes, currentSecurityLevel, currentAuthType, currentAssocModel) {
   for (var x in accessTypes) {
     var accessType = accessTypes[x]
     for (var i in services) {
@@ -200,7 +204,11 @@ ObjectHandler.prototype.updateFinalSecurity = function (outputJsonObject, curren
             // Since we are at the highest security level and pairing didn't work, there must be some custom security.
             var securityNum = 'x'
             var securityLevel = this._secLevelMapper[securityNum]
-            outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][accessType]['securityLevel'] = securityLevel  
+            var authType = authModels[currentAuthType]
+            var assocModel = authModels[currentAssocModel]
+            outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][accessType]['securityLevel'] = securityLevel
+            outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][accessType]['authType'] = authType
+            outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][accessType]['assocModel'] = assocModel
           }
         }
       }

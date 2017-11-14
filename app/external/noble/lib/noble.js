@@ -155,8 +155,8 @@ Noble.prototype.onConnect = function (peripheralUuid, error) {
   }
 }
 
-Noble.prototype.pair = function (peripheralUuid, smpRequestBuffer, passkeyOpt) {
-  this._bindings.pair(peripheralUuid, smpRequestBuffer, passkeyOpt)
+Noble.prototype.pair = function (peripheralUuid, smpRequestBuffer, passkeyOpt, passkeyVal) {
+  this._bindings.pair(peripheralUuid, smpRequestBuffer, passkeyOpt, passkeyVal)
 }
 
 Noble.prototype.onPair = function (peripheralUuid, failReason, authType, assocModel) {

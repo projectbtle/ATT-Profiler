@@ -1,0 +1,158 @@
+{
+    "deviceDetails": {
+        "name": "OurCharacteristic",
+        "id": "e89757070c06",
+        "address": "e8:97:57:07:0c:06",
+        "connectable": true
+    },
+    "Services": {
+        "1800": {
+            "name": "Generic Access",
+            "type": "org.bluetooth.service.generic_access",
+            "Characteristics": {
+                "2a00": {
+                    "name": "Device Name",
+                    "type": "org.bluetooth.characteristic.gap.device_name",
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": null,
+                            "value": "4f75724368617261637465726973746963",
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a01": {
+                    "name": "Appearance",
+                    "type": "org.bluetooth.characteristic.gap.appearance",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": null,
+                            "value": "0000",
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "2a04": {
+                    "name": "Peripheral Preferred Connection Parameters",
+                    "type": "org.bluetooth.characteristic.gap.peripheral_preferred_connection_parameters",
+                    "properties": [
+                        "read"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": null,
+                            "value": "5000a00000009001",
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        },
+        "1801": {
+            "name": "Generic Attribute",
+            "type": "org.bluetooth.service.generic_attribute",
+            "Characteristics": {
+                "2a05": {
+                    "name": "Service Changed",
+                    "type": "org.bluetooth.characteristic.gatt.service_changed",
+                    "properties": [
+                        "indicate"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": false
+                        }
+                    },
+                    "Descriptors": {
+                        "2902": {
+                            "name": "Client Characteristic Configuration",
+                            "type": "org.bluetooth.descriptor.gatt.client_characteristic_configuration",
+                            "security": {}
+                        }
+                    }
+                }
+            }
+        },
+        "0000f00d1212efde1523785fef13d123": {
+            "name": null,
+            "type": null,
+            "Characteristics": {
+                "0000beea1212efde1523785fef13d123": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": null,
+                            "value": "12345678",
+                            "securityLevel": "None"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "0000beeb1212efde1523785fef13d123": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": null,
+                            "securityLevel": "Med",
+                            "authType": "Legacy",
+                            "assocModel": "JustWorks",
+                            "value": "12345678"
+                        }
+                    },
+                    "Descriptors": {}
+                },
+                "0000beec1212efde1523785fef13d123": {
+                    "name": null,
+                    "type": null,
+                    "properties": [
+                        "read",
+                        "write"
+                    ],
+                    "security": {
+                        "read": {
+                            "error": null,
+                            "applicable": true,
+                            "otherError": null,
+                            "securityLevel": "High",
+                            "authType": "Legacy",
+                            "assocModel": "Passkey",
+                            "value": "12345678"
+                        }
+                    },
+                    "Descriptors": {}
+                }
+            }
+        }
+    }
+}

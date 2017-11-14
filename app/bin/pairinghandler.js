@@ -19,7 +19,7 @@ function PairingHandler () {
 
 util.inherits(PairingHandler, events.EventEmitter)
 
-PairingHandler.prototype.pair = function (peripheral, targetLevel, passkeyOpt, callback, pairingTimeout = 8000) {
+PairingHandler.prototype.pair = function (peripheral, targetLevel, passkeyOpt, passkeyVal, callback, pairingTimeout = 8000) {
   debug('[PAIRING HANDLER] Attempting to pair with security level ' + targetLevel)
   // this.deletePairingInfo(peripheral.address)
   var smpBuffer = this.pairingOptions(targetLevel)
@@ -37,7 +37,7 @@ PairingHandler.prototype.pair = function (peripheral, targetLevel, passkeyOpt, c
     }
   }.bind(this)
 
-  peripheral.pair(smpBuffer, passkeyOpt, customCallback)
+  peripheral.pair(smpBuffer, passkeyOpt, passkeyVal, customCallback)
 }
 
 PairingHandler.prototype.pairingOptions = function (securityLevel) {

@@ -59,10 +59,10 @@ NobleBindings.prototype.disconnect = function(peripheralUuid) {
   this._hci.disconnect(this._handles[peripheralUuid]);
 };
 
-NobleBindings.prototype.pair = function(peripheralUuid, smpRequestBuffer, passkeyOpt) {
+NobleBindings.prototype.pair = function(peripheralUuid, smpRequestBuffer, passkeyOpt, passkeyVal) {
   var handle = this._handles[peripheralUuid]
   var aclStream = this._aclStreams[handle]
-  aclStream.pair(smpRequestBuffer, passkeyOpt)
+  aclStream.pair(smpRequestBuffer, passkeyOpt, passkeyVal)
 
   aclStream.once('smpPairing', this.onPair.bind(this))
   aclStream.once('ediv', this.onEdiv.bind(this))

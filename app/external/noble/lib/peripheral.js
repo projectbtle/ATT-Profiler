@@ -58,7 +58,7 @@ Peripheral.prototype.disconnect = function (callback) {
 };
 
 /* Profiler Code BEGIN */
-Peripheral.prototype.pair = function (buffSmpReq, passkeyOpt, callbackFn) {
+Peripheral.prototype.pair = function (buffSmpReq, passkeyOpt, passkeyVal, callbackFn) {
   var pairComplete = false
   var pairResponse = false
   var authType = null
@@ -89,18 +89,18 @@ Peripheral.prototype.pair = function (buffSmpReq, passkeyOpt, callbackFn) {
       this.removeAllListeners('ltkEdiv')
       if (pairComplete === false) {
         if (pairResponse === false) {
-          console.log('[Peripheral] Executing callback with timeout.')
+          debug('[Peripheral] Executing callback with timeout.')
           callbackFn('Timeout', authType, assocModel)
         } else if (tempLtk === null) {
           if (this.state === 'disconnected') {
-            console.log('[Peripheral] Executing callback with disconnect.')
+            debug('[Peripheral] Executing callback with disconnect.')
             callbackFn('Disconnected', authType, assocModel)
           } else {
-            console.log('[Peripheral] Executing callback with NoLtk. ' + authType + ' ' + assocModel)
+            debug('[Peripheral] Executing callback with NoLtk. ' + authType + ' ' + assocModel)
             callbackFn(null, authType, assocModel, 'NoLtk')
           }          
         } else {
-          console.log('[Peripheral] Executing callback with Unknown.')
+          debug('[Peripheral] Executing callback with Unknown.')
           callbackFn('Unknown',authType, assocModel)
         }
       }
@@ -112,7 +112,7 @@ Peripheral.prototype.pair = function (buffSmpReq, passkeyOpt, callbackFn) {
     this.emit('pairResult', new Error('Peripheral already paired'))
   } else {
     this.state = 'pairing'
-    this._noble.pair(this.id, buffSmpReq, passkeyOpt)
+    this._noble.pair(this.id, buffSmpReq, passkeyOpt, passkeyVal)
   }
 }
 

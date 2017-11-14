@@ -28,8 +28,8 @@ AclStream.prototype.encrypt = function() {
   this._smp.sendPairingRequest();
 };
 
-AclStream.prototype.pair = function(smpRequestBuffer, passkeyOpt) {
-  this._smp.sendCustomPairingRequest(smpRequestBuffer, passkeyOpt);
+AclStream.prototype.pair = function(smpRequestBuffer, passkeyOpt, passkeyVal) {
+  this._smp.sendCustomPairingRequest(smpRequestBuffer, passkeyOpt, passkeyVal);
 };
 
 AclStream.prototype.write = function(cid, data) {

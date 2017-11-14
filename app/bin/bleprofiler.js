@@ -28,7 +28,7 @@ var SMP_MODEL_OOB = 3
 
 var test  = require('./assoc-model.json')
 // Startup.
-var BleProfiler = function (limitToProperty, includeRead, includeWrite, includeNotify, passkeyOpt) {
+var BleProfiler = function (limitToProperty, includeRead, includeWrite, includeNotify, passkeyOpt, passkeyVal, outputFileName) {
   this._bleScanner = new BleScanner()
   this._securityProfiler = new SecurityProfiler()
   this._pairingHandler = new PairingHandler()
@@ -39,6 +39,8 @@ var BleProfiler = function (limitToProperty, includeRead, includeWrite, includeN
   this._checksComplete = false
   this._limitToProperty = true
   this._passkeyOpt = passkeyOpt
+  this._passkeyVal = passkeyVal
+  this._outputFileName = outputFileName
   this._targetDevice = null
   this._state = 'disconnected'
   this._services = null
@@ -378,7 +380,7 @@ BleProfiler.prototype.scanForDevices = function (scanTime) {
 
   var handleSecurityProfilerOutput = function (errorObject, securityObject, access) {
     this._numCharChecked[access]++
-    this._outputJsonObject = this._objectHandler.updateJsonObject(this._outputJsonObject, this._services, this._characteristics, access, this._currentSecLevel, errorObject, securityObject)
+    this._outputJsonObject = this._objectHandler.updateJsonObject(this._outputJsonObject, this._services, this._characteristics, access, this._currentSecLevel, errorObject, securityObject, this._currAuthType, this._currAssocModel)
     checkAllParams(access)
   }.bind(this)
 
@@ -431,22 +433,20 @@ BleProfiler.prototype.scanForDevices = function (scanTime) {
   var increaseSecurity = function () {
     this._currentSecLevel++
 
-    var callback = function (error, authType) {
-      console.log('error ' + error + 'auth '+ authType + ' asso ' )
+    var callback = function (error, authType, assocModel) {
+      this._currAuthType = authType
+      this._currAssocModel = assocModel
+
       if (error) {
         console.log('Pairing attempt failed at Security Level ' + this._currentSecLevel + '. Pairing error: ' + error)
         if (this._currentSecLevel < SECURITY_LEVEL_HIGH) {
           increaseSecurity()
         } else {
           // No use in re-checking, because pairing at highest level failed.
-          this._outputJsonObject = this._objectHandler.updateFinalSecurity(this._outputJsonObject, this._currentSecLevel, this._services, this._characteristics, this._accessTypes)
-          //checkAllCharacteristics(true)
+          this._outputJsonObject = this._objectHandler.updateFinalSecurity(this._outputJsonObject, this._services, this._characteristics, this._accessTypes, this._currentSecLevel, this._currAuthType, this._currAssocModel)
           finalOutput()
         }
-      } else {
-        this._currAuthType = authType
-       // this._currAssocModel = assocModel
-        
+      } else {  
         console.log('Pairing ok')
         this._state = 'paired'
         checkAllCharacteristics(true)
@@ -464,14 +464,14 @@ BleProfiler.prototype.scanForDevices = function (scanTime) {
 
       this.once('reconnected', function () {
         console.log('Now attempting to pair at Security Level ' + this._currentSecLevel)
-        this._pairingHandler.pair(this._targetDevice, this._currentSecLevel, this._passkeyOpt, callback)
+        this._pairingHandler.pair(this._targetDevice, this._currentSecLevel, this._passkeyOpt, this._passkeyVal, callback)
       })
     }.bind(this), 3000)
   }.bind(this)
 
   var finalOutput = function () {
     console.log('Checked security for all characteristics.\nWriting output to file now. Please wait...')
-    fs.writeFileSync('output.json', JSON.stringify(this._outputJsonObject, null, 4))
+    fs.writeFileSync(this._outputFileName, JSON.stringify(this._outputJsonObject, null, 4))
     console.log('File write complete.')
     process.exit()
   }.bind(this)
