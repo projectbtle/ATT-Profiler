@@ -26,7 +26,13 @@ var SMP_MODEL_PASSKEY = 1
 var SMP_MODEL_NUMERIC = 2
 var SMP_MODEL_OOB = 3
 
-var test  = require('./assoc-model.json')
+// Passkey pairing - options for PIN.
+var passkeyOptions = require('./passkey-options.json')
+
+var SMP_PASSKEY_MANUAL = passkeyOptions["SMP_PASSKEY_MANUAL"][1]     // Fixed passkey.
+var SMP_PASSKEY_DYNAMIC= passkeyOptions["SMP_PASSKEY_DYNAMIC"][1]        // Dynamic passkey.
+var SMP_PASSKEY_DICTIONARY = passkeyOptions["SMP_PASSKEY_DICTIONARY"][1]  // Try passkey values from dictionary.
+
 // Startup.
 var BleProfiler = function (limitToProperty, includeRead, includeWrite, includeNotify, passkeyOpt, passkeyVal, outputFileName) {
   this._bleScanner = new BleScanner()
@@ -91,6 +97,21 @@ var BleProfiler = function (limitToProperty, includeRead, includeWrite, includeN
   this._currentCheck = null
   this._timeoutCount = 0
   this._timeoutQueue = []
+
+  // Read passwords from file if dictionary tries are required.
+  if (this._passkeyOpt === SMP_PASSKEY_DICTIONARY) {
+    this._dictionary = true
+    this._dictionaryCount = 0
+
+    this._pinArray = fs.readFileSync('./app/bin/pins.txt').toString().split("\n")
+    for (var x = 0; x < this._pinArray.length; x++) {
+      if (this._pinArray[x] === '') {
+        this._pinArray.splice(x,1)
+        x--
+      }
+    }
+    this._passkeyVal = this._pinArray[this._dictionaryCount]
+  }
 }
 
 util.inherits(BleProfiler, events.EventEmitter)
@@ -380,7 +401,7 @@ BleProfiler.prototype.scanForDevices = function (scanTime) {
 
   var handleSecurityProfilerOutput = function (errorObject, securityObject, access) {
     this._numCharChecked[access]++
-    this._outputJsonObject = this._objectHandler.updateJsonObject(this._outputJsonObject, this._services, this._characteristics, access, this._currentSecLevel, errorObject, securityObject, this._currAuthType, this._currAssocModel)
+    this._outputJsonObject = this._objectHandler.updateJsonObject(this._outputJsonObject, this._services, this._characteristics, access, this._currentSecLevel, errorObject, securityObject, this._currAuthType, this._currAssocModel, this._fixedPIN)
     checkAllParams(access)
   }.bind(this)
 
@@ -430,23 +451,36 @@ BleProfiler.prototype.scanForDevices = function (scanTime) {
     }
   }.bind(this)
 
-  var increaseSecurity = function () {
-    this._currentSecLevel++
+  var increaseSecurity = function (increaseSec = true) {
+    if (increaseSec === true) {
+      this._currentSecLevel++
+    }
 
     var callback = function (error, authType, assocModel) {
       this._currAuthType = authType
       this._currAssocModel = assocModel
 
       if (error) {
-        console.log('Pairing attempt failed at Security Level ' + this._currentSecLevel + '. Pairing error: ' + error)
-        if (this._currentSecLevel < SECURITY_LEVEL_HIGH) {
-          increaseSecurity()
+        // If it's to do with passkey entry and we have dictionary tries enabled.
+        if ((this._dictionary === true) && (this._dictionaryCount < this._pinArray.length) && ((error === 'Passkey Entry Failed') || (error === 'Confirm Value Failed'))) {
+          this._dictionaryCount++
+          this._passkeyVal = this._pinArray[this._dictionaryCount]
+          increaseSecurity(false)
         } else {
-          // No use in re-checking, because pairing at highest level failed.
-          this._outputJsonObject = this._objectHandler.updateFinalSecurity(this._outputJsonObject, this._services, this._characteristics, this._accessTypes, this._currentSecLevel, this._currAuthType, this._currAssocModel)
-          finalOutput()
+          console.log('Pairing attempt failed at Security Level ' + this._currentSecLevel + '. Pairing error: ' + error)
+          if (this._currentSecLevel < SECURITY_LEVEL_HIGH) {
+            increaseSecurity()
+          } else {
+            // No use in re-checking, because pairing at highest level failed.
+            this._outputJsonObject = this._objectHandler.updateFinalSecurity(this._outputJsonObject, this._services, this._characteristics, this._accessTypes, this._currentSecLevel, this._currAuthType, this._currAssocModel)
+            finalOutput()
+          }
+        }        
+      } else {
+        // If a fixed PIN was used.
+        if (this._passkeyVal !== null) {
+          this._fixedPIN = true
         }
-      } else {  
         console.log('Pairing ok')
         this._state = 'paired'
         checkAllCharacteristics(true)

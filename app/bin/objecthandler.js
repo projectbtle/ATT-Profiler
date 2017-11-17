@@ -96,7 +96,7 @@ ObjectHandler.prototype.createTargetObject = function (outputJsonObject, service
   return {json: outputJsonObject, num: numCharCheckable}
 }
 
-ObjectHandler.prototype.updateJsonObject = function (outputJsonObject, services, characteristics, actionType, currentSecurityLevel, errorObject, securityObject, currentAuthType, currentAssocModel) {
+ObjectHandler.prototype.updateJsonObject = function (outputJsonObject, services, characteristics, actionType, currentSecurityLevel, errorObject, securityObject, currentAuthType, currentAssocModel, fixedPin) {
   var useObj = (errorObject === null) ? securityObject : errorObject
 
   var serviceUuid = useObj.serviceUuid
@@ -155,6 +155,10 @@ ObjectHandler.prototype.updateJsonObject = function (outputJsonObject, services,
   var assocModel = authModels[currentAssocModel]
   outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][actionType]['securityLevel'] = securityLevel
   outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][actionType]['authType'] = authType
+  // If the model used a fixed PIN.
+  if ((assocModel === 'Passkey') && (fixedPin !== null) ){
+    assocModel = 'Passkey with Fixed PIN'
+  }
   outputJsonObject['Services'][serviceUuid]['Characteristics'][characteristicUuid]['security'][actionType]['assocModel'] = assocModel
   return outputJsonObject
 }

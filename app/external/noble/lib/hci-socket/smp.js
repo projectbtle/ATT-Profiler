@@ -37,13 +37,6 @@ var SMP_MODEL_PASSKEY = 0x01
 var SMP_MODEL_NUMERIC = 0x02
 var SMP_MODEL_OOB = 0x03
 
-// Passkey pairing - options for PIN.
-var passkeyOptions = require('../../../../bin/passkey-options.json')
-
-var SMP_PASSKEY_MANUAL = passkeyOptions["SMP_PASSKEY_MANUAL"][1]     // Fixed passkey.
-var SMP_PASSKEY_DYNAMIC= passkeyOptions["SMP_PASSKEY_DYNAMIC"][1]        // Dynamic passkey.
-var SMP_PASSKEY_DICTIONARY = passkeyOptions["SMP_PASSKEY_DICTIONARY"][1]  // Try passkey values from dictionary.
-
 var Smp = function (aclStream, localAddressType, localAddress, remoteAddressType, remoteAddress) {
   this._aclStream = aclStream;
 
@@ -129,6 +122,7 @@ Smp.prototype.onAclStreamEnd = function () {
 };
 
 Smp.prototype.onAclStreamEncrypt = function () {
+  
   this.emit('pairing', null, this._authType, this._assocModel)
 }
 
@@ -249,18 +243,12 @@ Smp.prototype.handleLegacyPasskeyPairing = function (data) {
   if (this._inputPasskey === '000000') {
     // Passkey with all-zero PIN is no different to Just Works for LE Legacy.
     this.handleLegacyJustWorksPairing(data)
-  } else if (this._passkeyOpt === SMP_PASSKEY_DICTIONARY) {
-    // Check passkey from dictionary.
   } else {
     // Get user to input passkey.
     this.handleLegacyPasskeyPairingManual(data)
   }
   return
 };
-
-Smp.prototype.handleLegacyPasskeyPairingDict = function () {
-  
-}
 
 Smp.prototype.handleLegacyPasskeyPairingManual = function (data) {
   // Get passkey from user
@@ -276,6 +264,7 @@ Smp.prototype.handleLegacyPasskeyPairingManual = function (data) {
       this.handleLegacyPasskeyReceived(data)
     })
   } else {
+    console.log('Attempting pairing with passkey: ' + this._inputPasskey)
     this.handleLegacyPasskeyReceived(data)
   }  
 }
@@ -323,7 +312,7 @@ Smp.prototype.handlePairingRandom = function (data) {
 };
 
 Smp.prototype.handlePairingFailed = function (data) {
-  var failReasonHex = data[1]
+  var failReasonHex = data[1]  
   var failReasonString = failReasonHex.toString(16)
   debug('Pairing failed with reason code 0x' + failReasonString)
   this.emit('pairing', failReasonString);
