@@ -62,7 +62,7 @@ SecurityProfiler.prototype.writeCharacteristics = function (characteristic, call
   var written = false
   var outputObject = {serviceUuid: characteristic._serviceUuid, characteristicUuid: characteristic.uuid, error: null, value: null}
   console.log('[SECURITY-PROFILER] Attempting to write characteristic ' + characteristic.uuid)
-  characteristic.write(new Buffer([0x01]), false, function (error, data) {
+  characteristic.write(new Buffer([0x68,0x69]), false, function (error, data) {
     written = true
     this.outputHandler('write', characteristic.uuid, error, data, outputObject, callback)
   }.bind(this))
