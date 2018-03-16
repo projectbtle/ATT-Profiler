@@ -12,7 +12,7 @@ for(var pOpt in passkeyOptions){
 var showHelp = function () {
     console.log('BLE PROFILER HELP')
     console.log('This tool tests the security level applied to characteristics on a BLE peripheral device.\n')
-    console.log('Usage:\nsudo node index.js [-h] [-a] [-r] [-w] [-n] [-p opts]')
+    console.log('Usage:\nsudo node index.js [-h] [-a] [-r] [-w] [-n] [-o filename] [-p opts]')
     console.log('  -h    Show help')
     console.log('  -a    Test all characteristics [Default=false]')
     console.log('  -r    Test only read access [Default=true]')
