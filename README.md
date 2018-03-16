@@ -5,6 +5,8 @@
 BLE Profiler is a Node.js tool for profiling a Bluetooth Low Energy peripheral, built on top of a modified version of the [BLE central emulator by Sandeep Mistry](https://github.com/sandeepmistry/noble).
 It enumerates the services/characteristics that are exposed by a device and, where possible, tags the level of protection applied to each service/characteristic.
 
+The tool also offers the functionality to perform a rudimentary "dictionary attack" against the device PIN, by performing repeated pairing attempts with different PIN values.
+
 ## Prerequisites
 
 Install Node.js
@@ -82,6 +84,16 @@ e.g., to check Read and Write for all characteristics, use:
 ```cmd 
 node index -r -w -a
 ```
+
+### Passkey options
+Use the ```-p``` flag to work with different passkey options. <br />
+```-p <PIN>``` allows the user to provide a static PIN during code execution. Works for devices with fixed PINs. <br />
+```-p u``` prompts the user to input a PIN via the console during runtime. Applicable for devices that generate dynamic PINs. <br />
+```-p d``` performs a dictionary "attack" to try and find the PIN. Useful for identifying weak static PINs (although, any static PIN is inadvisable).
+
+### Output options
+By default, the tool generates a timestamped output file. If a specific name is required, it can be specified with the ```-o``` flag.
+```-o <outputfilename>```
 
 ## Troubleshooting
 If the code gets stuck after "Connected to xx:xx:... ", or if it disconnects immediately after connecting, it probably means that the system has stored some previous pairing information for the device. On Windows, delete or "forget" the pairing. On Linux, try unpairing using
