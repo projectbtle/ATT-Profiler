@@ -92,7 +92,7 @@ Use the ```-p``` flag to work with different passkey options. <br />
 ```-p d``` performs a dictionary "attack" to try and find the PIN. Useful for identifying weak static PINs (although, any static PIN is inadvisable).
 
 ### Output options
-By default, the tool generates a timestamped output file. If a specific name is required, it can be specified with the ```-o``` flag.
+By default, the tool generates a timestamped JSON file. If a specific name is required, it can be specified with the ```-o``` flag. Do not specify a file extension.
 ```-o <outputfilename>```
 
 ## Troubleshooting
