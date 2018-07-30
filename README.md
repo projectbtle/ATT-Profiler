@@ -109,7 +109,7 @@ sudo ls /var/lib/bluetooth/YY:YY:YY:YY:YY:YY
 Here YY:YY:YY:YY:YY:YY is the MAC address of the HCI interface on the test machine. There should be no file or folder named xx:xx:xx:xx:xx:xx (where again xx:xx:xx:xx:xx:xx is the MAC address of the peripheral).
 
 ## Publications
-[A Low Energy Profile: Analysing Characteristic Security on BLE Peripherals](https://dl.acm.org/citation.cfm?id=3176945).
+[A Low Energy Profile: Analysing Characteristic Security on BLE Peripherals](https://dl.acm.org/citation.cfm?id=3176945). <br />
 Poster paper, published in the Proceedings of the [Eighth ACM Conference on Data and Application Security and Privacy](http://www.codaspy.org/2018/index.html).
 
 # Disclaimer #
