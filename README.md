@@ -112,6 +112,9 @@ Here YY:YY:YY:YY:YY:YY is the MAC address of the HCI interface on the test machi
 [A Low Energy Profile: Analysing Characteristic Security on BLE Peripherals](https://dl.acm.org/citation.cfm?id=3176945). <br />
 Poster paper, published in the Proceedings of the [Eighth ACM Conference on Data and Application Security and Privacy](http://www.codaspy.org/2018/index.html).
 
+## Limitations
+Some devices artifically "lock" access to some of the characteristics, which have to be "unlocked" by writing some custom bytes to other characteristics. This is implementation-specific and won't be identified by the Profiler. The output may show Read/Write Not Permitted or Unknown for such characteristics.
+
 # Disclaimer #
 This script, especially when used with the -w switch, may brick or otherwise render unusable the test device. We accept no responsibility if this should occur. Please understand the risks before running the script.
 
