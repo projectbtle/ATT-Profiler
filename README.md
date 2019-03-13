@@ -1,8 +1,8 @@
 # README #
 
-### BLE Profiler ###
+### ATT Profiler ###
 
-BLE Profiler is a Node.js tool for profiling a Bluetooth Low Energy peripheral, built on top of a modified version of the [BLE central emulator by Sandeep Mistry](https://github.com/sandeepmistry/noble).
+ATT Profiler is a Node.js tool for profiling a Bluetooth Low Energy peripheral, built on top of a modified version of the [BLE central emulator by Sandeep Mistry](https://github.com/sandeepmistry/noble).
 It enumerates the services/characteristics that are exposed by a device and, where possible, tags the level of protection applied to each service/characteristic.
 
 The tool also offers the functionality to perform a rudimentary "dictionary attack" against the device PIN, by performing repeated pairing attempts with different PIN values.
