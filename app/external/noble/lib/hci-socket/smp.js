@@ -78,6 +78,7 @@ Smp.prototype.sendCustomPairingRequest = function (customPairingRequest, passkey
   this._preqIo= null      // IO capabilities
   this._preqLesc = null   // LESC capable?
   this._preqMitm = null   // MITM protection required?
+  this._preqKeySize = null // Max encryption key size
   // Pairing response params
   this._presIo= null      // IO capabilities
   this._presLesc = null   // LESC capable?
@@ -163,6 +164,7 @@ Smp.prototype.identifyAuthenticationMethod = function () {
   this._preqIo = this._preq.readUInt8(1)
   this._preqOob = this._preq.readUInt8(2)
   var preqAuthReqHex = this._preq.readUInt8(3)
+  this._preqKeySize = this._preq.readUInt8(4)
   this._preqMitm = (preqAuthReqHex >> 2) & 1
   this._preqLesc = (preqAuthReqHex >> 3) & 1
 
@@ -300,6 +302,20 @@ Smp.prototype.handlePairingRandom = function (data) {
   if (this._pcnf.toString('hex') === pcnf.toString('hex')) {
     var stk = crypto.s1(this._tk, r, this._r);
 
+    // Perform key masking if needed.
+    var stkString = stk.toString('hex');
+    var keySizeString = this._preqKeySize.toString(10);
+    if (keySizeString < 16) {
+        var zeroStk = Buffer.alloc(16-keySizeString);
+        var cutStk = stk.slice(0,keySizeString);
+        var newStk = Buffer.concat([cutStk,zeroStk], 16)
+        stk = newStk;
+    }
+    console.log('[SMP] STK before masking ' + stkString);
+    console.log('[SMP] Key size ' + keySizeString);
+    stkString = stk.toString('hex');
+    console.log('[SMP] STK after masking ' + stkString);
+    
     this.emit('stk', stk);
   } else {
     this.write(new Buffer([
@@ -329,6 +345,20 @@ Smp.prototype.handlePairingConfirm = function (data) {
 
 Smp.prototype.handleEncryptInfo = function (data) {
   var ltk = data.slice(1);
+
+  // Perform key masking if needed.
+  var ltkString = ltk.toString('hex');
+  var keySizeString = this._preqKeySize.toString(10);
+  if (keySizeString < 16) {
+      var zeroltk = Buffer.alloc(16-keySizeString);
+      var cutltk = ltk.slice(0,keySizeString);
+      var newltk = Buffer.concat([cutltk,zeroltk], 16)
+      ltk = newltk;
+  }
+  console.log('[SMP] ltk before masking ' + ltkString);
+  console.log('[SMP] Key size ' + keySizeString);
+  ltkString = ltk.toString('hex');
+  console.log('[SMP] ltk after masking ' + ltkString);
 
   this._ltk = ltk
   this.emit('ltk', ltk);
