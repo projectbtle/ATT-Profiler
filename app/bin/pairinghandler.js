@@ -65,10 +65,10 @@ PairingHandler.prototype.pairingOptions = function (securityLevel) {
         0x01, // SMP pairing request
         0x03, // IO capability: NoInputNoOutput
         0x00, // OOB data: Authentication data not present
-        0x01, // Authentication requirement: Bonding - No MITM
+        0x00, // Authentication requirement: No bonding - No MITM
         0x08, // Max encryption key size
         0x00, // Initiator key distribution: <none>
-        0x01  // Responder key distribution: EncKey
+        0x00  // Responder key distribution: <none>
       ])
       break
 
@@ -77,10 +77,10 @@ PairingHandler.prototype.pairingOptions = function (securityLevel) {
         0x01, // SMP pairing request
         0x01, // IO capability: DisplayYesNo
         0x00, // OOB data: Authentication data not present
-        0x01, // Authentication requirement: Bonding - No MITM
+        0x00, // Authentication requirement: No bonding - No MITM
         0x10, // Max encryption key size
         0x00, // Initiator key distribution: <none>
-        0x01  // Responder key distribution: LTK
+        0x00  // Responder key distribution: <none>
       ])
       break
 
@@ -89,10 +89,10 @@ PairingHandler.prototype.pairingOptions = function (securityLevel) {
         0x01, // SMP pairing request
         0x04, // IO capability: KeyboardDisplay
         0x00, // OOB data: Authentication data not present
-        0x05, // Authentication requirement: Bonding - MITM
+        0x04, // Authentication requirement: No bonding - MITM
         0x10, // Max encryption key size
         0x00, // Initiator key distribution: <none>
-        0x01  // Responder key distribution: LTK
+        0x00  // Responder key distribution: <none>
       ])
       break
 
